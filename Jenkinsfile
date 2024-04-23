@@ -1,11 +1,11 @@
 pipeline{
     agent any
-    stages {
-        stage("Clean up"){
-            steps{
-                deleteDir()
-            }
-        }
+     stages {
+    //     stage("Clean up"){
+    //         steps{ck
+    //             deleteDir()
+    //         }
+    //     }
         // stage("Clone repo"){
         //     steps{
         //         sh "git clone git@github.com:Harshvardhansinh-jadeja/serverless.git"
