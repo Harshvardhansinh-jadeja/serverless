@@ -1,29 +1,30 @@
 pipeline{
     agent any
-
-    parameters{
-        booleanParam(defaultValue: false, description: "Enable Service?", name: "myBoolean")
-        string(defaultValue: "PROD", description: "Which Environment?", name: "environment")
-        choice(choices: ["TEST","PROD","DEV","QA"], description: "Drop down of envs", name: "dropEnv")
+    environment{
+        AWS_ACCESS_KEY_ID = credentials('aws-credentials')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-credentials')
     }
+    // parameters{
+    //     booleanParam(defaultValue: false, description: "Enable Service?", name: "myBoolean")
+    //     string(defaultValue: "PROD", description: "Which Environment?", name: "environment")
+    //     choice(choices: ["TEST","PROD","DEV","QA"], description: "Drop down of envs", name: "dropEnv")
+    // }
      stages {
-
-        stage("Build"){
+        stage("terraform commands"){
             steps{
-                dir("frontend"){
+                dir("Infrastructure"){
                     bat'''
-                    // npm install
-                    npm run build
-                    
+                    terraform init
+                    terraform plan
                     '''
                     }
             }
         }
-        stage("Parameter"){
+        stage("Build and S3"){
             steps{
                     dir("frontend"){
-                    echo "Parameter is : ${params.myBoolean}"
-                    echo "Parameter is : ${params.environment}"
+                    npm run build
+                    aws s3 sync build s3://harshvardhan-personal
                     }
             }
         }
