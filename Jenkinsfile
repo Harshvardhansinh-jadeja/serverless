@@ -14,7 +14,7 @@ pipeline{
         stage("Build"){
             steps{
                 bat'''
-                cd serverless/frontend
+                cd serverless\\frontend
                 npm run build
                 '''
             }
