@@ -15,7 +15,7 @@ pipeline{
         stage("Test"){
             steps{
                     dir("frontend"){
-                        sh "npm start"
+                        bat "npm start"
                     }
             }
         }
