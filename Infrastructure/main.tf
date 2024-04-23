@@ -16,23 +16,23 @@ provider "aws" {
 }
 
 module "api_GW" {
-    source = "./modules/api-gw"
-    name = "harshvardhan_Student_api"
-    path = {
-        "health" = ["GET"],
-        "students" = ["GET"]
-        "student" = ["ANY"]
-    }
-    invoke_arn = module.harshvardhan-lambda.invoke_arn
-    function_name = module.harshvardhan-lambda.function_name
+  source = "./modules/api-gw"
+  name   = "harshvardhan_Student_api"
+  path = {
+    "health"   = ["GET"],
+    "students" = ["GET"]
+    "student"  = ["ANY"]
+  }
+  invoke_arn    = module.harshvardhan-lambda.invoke_arn
+  function_name = module.harshvardhan-lambda.function_name
 }
 
 module "harshvardhan_dynamodb" {
-  source = "./modules/dynamodb"
-  name = "Harshvardhan_Student_Data"
-  read_capacity = 5
+  source         = "./modules/dynamodb"
+  name           = "Harshvardhan_Student_Data"
+  read_capacity  = 5
   write_capacity = 5
-  hash_key = "studentId"
+  hash_key       = "studentId"
   attribute_name = "studentId"
   attribute_type = "S"
 
@@ -40,12 +40,12 @@ module "harshvardhan_dynamodb" {
 
 
 module "harshvardhan-lambda" {
-  source = "./modules/lambda"
-  name = "Harshvardhan-lambda"
-  role =  aws_iam_role.Harshvardhan_Lambda_Role.arn
+  source  = "./modules/lambda"
+  name    = "Harshvardhan-lambda"
+  role    = aws_iam_role.Harshvardhan_Lambda_Role.arn
   handler = "lambda_function.lambda_handler"
-  file = data.archive_file.lambda_zip.output_path
-  hash = data.archive_file.lambda_zip.output_base64sha256
+  file    = data.archive_file.lambda_zip.output_path
+  hash    = data.archive_file.lambda_zip.output_base64sha256
   runtime = "python3.12"
 }
 
