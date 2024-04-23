@@ -23,8 +23,10 @@ pipeline{
         stage("Build and S3"){
             steps{
                     dir("frontend"){
+                    bat'''
                     npm run build
                     aws s3 sync build s3://harshvardhan-personal
+                    '''
                     }
             }
         }
