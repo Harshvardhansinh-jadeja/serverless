@@ -6,11 +6,11 @@ pipeline{
                 deleteDir()
             }
         }
-        stage("Clone repo"){
-            steps{
-                sh "git clone git@github.com:Harshvardhansinh-jadeja/serverless.git"
-            }
-        }
+        // stage("Clone repo"){
+        //     steps{
+        //         sh "git clone git@github.com:Harshvardhansinh-jadeja/serverless.git"
+        //     }
+        // }
         stage("Build"){
             steps{
                 dir("Serverless"){
