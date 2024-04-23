@@ -13,17 +13,20 @@ pipeline{
         // }
         stage("Build"){
             steps{
-                dir("Serverless"){
-                    sh "npm run build"
-                }
+                bat'''
+                cd serverless/frontend
+                npm run build
+                '''
             }
         }
-        stage("Test"){
-            steps{
-                dir("serverless"){
-                    sh "npm start"
-                }
-            }
-        }
+        // stage("Test"){
+        //     steps{
+        //         dir("serverless"){
+        //             dir("frontend"){
+        //                 sh "npm start"
+        //             }
+        //         }
+        //     }
+        // }
     }
 }
