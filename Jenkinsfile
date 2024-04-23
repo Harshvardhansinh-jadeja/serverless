@@ -3,8 +3,8 @@ pipeline{
      stages {
 
         stage("Build"){
-            dir("frontend"){
-                steps{
+            steps{
+                dir("frontend"){
                     bat'''
                     // npm install
                     npm run build
