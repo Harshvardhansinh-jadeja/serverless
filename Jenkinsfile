@@ -1,32 +1,29 @@
 pipeline{
     agent any
      stages {
-    //     stage("Clean up"){
-    //         steps{ck
-    //             deleteDir()
-    //         }
-    //     }
-        // stage("Clone repo"){
-        //     steps{
-        //         sh "git clone git@github.com:Harshvardhansinh-jadeja/serverless.git"
-        //     }
-        // }
+
         stage("Build"){
-            steps{
-                bat'''
-                cd frontend
-                npm install
-                npm run build
-                '''
+            dir("frontend"){
+                steps{
+                    bat'''
+                    // npm install
+                    npm run build
+                    '''
+                    }
             }
         }
-        // stage("Test"){
-        //     steps{
-        //         dir("serverless"){
-        //             dir("frontend"){
-        //                 sh "npm start"
-        //             }
-        //         }
+        stage("Test"){
+            steps{
+                    dir("frontend"){
+                        sh "npm start"
+                    }
+            }
+        }
+        // stage("Clean up")
+        // {
+        //     steps
+        //     {
+        //         deleteDir()
         //     }
         // }
     }
