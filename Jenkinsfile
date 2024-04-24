@@ -9,13 +9,13 @@ pipeline{
         region="us-west-2"
     }
      stages {
-        stage("Get Parameter"){
+        stage("Variables"){
             steps{
-                dir("scripts"){
-                    bat''' 
-                    .\\ssm.ps1
-                    '''
-                    }
+                script{
+                    def BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
+                    echo "${BRANCH_NAME}"
+                    echo "${BUILD_NUMBER}"
+                }
             }
         }
         stage("terraform commands"){
