@@ -14,6 +14,7 @@ pipeline{
             steps{
                 dir("Infrastructure"){
                     bat'''
+                    
                     terraform init
                     terraform plan
                     '''
