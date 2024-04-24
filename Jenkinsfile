@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    tools {
+       terraform 'terraform'
+    }
     environment{
         AWS_ACCESS_KEY_ID = credentials('aws-credentials')
         AWS_SECRET_ACCESS_KEY = credentials('aws-credentials')
@@ -12,11 +15,12 @@ pipeline{
      stages {
         stage("terraform commands"){
             steps{
-                    bat'''
-                    cd Infrastructure  
+                dir("Infrastructure"){
+                    bat''' 
                     terraform init
                     terraform plan
                     '''
+                    }
             }
         }
         stage("Build and S3"){
