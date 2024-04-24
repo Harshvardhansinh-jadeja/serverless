@@ -9,6 +9,15 @@ terraform {
   required_version = "~> 1.7"
 }
 
+# Intialized Backend here.
+terraform {
+  backend "s3" {
+    bucket = "harshvardhan-tfstate"
+    key    = "serverless/terraform.tfstate"
+    region = "us-west-2"
+  }
+} 
+
 # AWS Provider 
 provider "aws" {
   # profile = var.profile
