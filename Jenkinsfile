@@ -12,13 +12,11 @@ pipeline{
      stages {
         stage("terraform commands"){
             steps{
-                dir("Infrastructure"){
                     bat'''
-                    
+                    cd Infrastructure  
                     terraform init
                     terraform plan
                     '''
-                    }
             }
         }
         stage("Build and S3"){
