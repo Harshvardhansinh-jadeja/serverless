@@ -6,7 +6,7 @@ resource "aws_iam_role" "Harshvardhan_Lambda_Role" {
 
   tags = {
     Name        = "Harshvardhan_Student_data"
-    Environment = var.env
+
   }
 }
 
