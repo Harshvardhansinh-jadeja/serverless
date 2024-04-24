@@ -13,7 +13,7 @@ pipeline{
             steps{
                 dir("scripts"){
                     bat''' 
-                    ./ssm.ps1
+                    .\\ssm.ps1
                     '''
                     }
             }

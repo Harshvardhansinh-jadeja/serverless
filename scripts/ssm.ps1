@@ -9,5 +9,4 @@
 #     # echo "TF_VAR_$param=${value}" >> $env:GITHUB_ENV
 #     "$param = `"$value`"" | Out-File -FilePath $TFVARS_FILE -Append
 # }
-
 echo 'hello'
