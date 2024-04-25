@@ -1,15 +1,3 @@
-data "aws_iam_policy_document" "assume_role" {
-  statement {
-    effect = "Allow"
-
-    principals {
-      type        = "Service"
-      identifiers = ["lambda.amazonaws.com"]
-    }
-
-    actions = ["sts:AssumeRole"]
-  }
-}
 
 resource "aws_iam_role" "Harshvardhan_Lambda_Role" {
   name = "Harshvardhan_Lambda_Role"
@@ -18,7 +6,7 @@ resource "aws_iam_role" "Harshvardhan_Lambda_Role" {
 
   tags = {
     Name        = "Harshvardhan_Student_data"
-    Environment = var.env
+
   }
 }
 
