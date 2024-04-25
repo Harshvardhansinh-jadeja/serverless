@@ -23,7 +23,7 @@ pipeline{
             steps{
                 dir("scripts"){
                 script{
-                        bat '.\\ssm.ps1'
+                        powershell '.\\ssm.ps1'
                     }
                 }
             }
