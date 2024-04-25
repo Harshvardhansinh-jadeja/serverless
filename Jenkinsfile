@@ -23,7 +23,7 @@ pipeline{
             steps{
                 dir("scripts"){
                 script{
-                        powershell '.\\ssm.ps1'
+                        powershell '.\\ssm.ps1 | Out-File -FilePath terraform.tfvars -Encoding utf8'
                     }
                 }
             }

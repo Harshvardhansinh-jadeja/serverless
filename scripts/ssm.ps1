@@ -9,3 +9,5 @@ foreach ($param in $PARAMS) {
     "$param = `"$value`"" | Out-File -FilePath $TFVARS_FILE -Append -Encoding utf8
 }
 
+# Specify the .NET encoding explicitly to ensure UTF-8
+[System.IO.File]::WriteAllText($TFVARS_FILE, (Get-Content $TFVARS_FILE -Raw), [System.Text.Encoding]::UTF8)
