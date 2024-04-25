@@ -19,13 +19,22 @@ pipeline{
                 }
             }
         }
-        stage("Poweshell scripts"){
+        stage("Run AWS parameter"){
             steps{
-                dir("scripts"){
                 script{
-                        powershell '.\\ssm.ps1 | Out-File -FilePath terraform.tfvars -Encoding utf8'
+                    def params = ["region", "invoke_url"]
+                    def region = "us-west-2"
+                    def prefix = "/harshvardhan/personal/account/"
+                    def tfvarsFile = "../Infrastructure/terraform.tfvars"
+
+                    // Getting SSM Parameter and passing it into the tfvars file.
+                    params.each { param ->
+                        def value = "aws --region $region ssm get-parameter --name \"$prefix$param\" --with-decryption --output text --query Parameter.Value".execute().text.trim()
+                        "$param = \"$value\"".withWriterAppend { out ->
+                            out.writeLine(tfvarsFile)
+                            }
+                        }
                     }
-                }
             }
         }
         stage("terraform commands"){
