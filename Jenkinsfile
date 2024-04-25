@@ -47,5 +47,12 @@ pipeline{
                     }
             }
         }
+        stage("Delete Terraform tfvars"){
+            steps{
+                dir("Infrastructure"){
+                        powershell 'del terraform.tfvars'
+                    }
+            }
+        }
     }
 }
