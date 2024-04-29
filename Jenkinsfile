@@ -9,6 +9,13 @@ pipeline{
         region="us-west-2"
     }
      stages {
+        stage("Set Build name") {
+            steps {
+                // use name of the patchset as the build name
+                buildName "${BUILD_NUMBER} - ${GIT_BRANCH.split("/")[1]}"
+                buildDescription "Executed @ ${NODE_NAME}"
+            }
+        }
         stage("Variables"){
             steps{
                 script{
@@ -51,6 +58,7 @@ pipeline{
             steps{
                 dir("Infrastructure"){
                         powershell 'del terraform.tfvars'
+                        powershell 'del lambda_function.zip'
                     }
             }
         }
